@@ -33,7 +33,7 @@
             document.getElementById("boot-screen").style.display = "none";
             document.getElementById("terminal").style.display = "block";
             document.getElementById("input").style.display = "block";
-            document.getElementById("terminal").innerText = "Enter Book Title:";
+            document.getElementById("terminal").innerText = "Enter Username:";
         }, 3000);
         
         document.getElementById("input").addEventListener("keypress", function(event) {
