@@ -6,7 +6,7 @@
     <style>
         body { background-color: black; color: green; font-family: monospace; padding: 20px; }
         #terminal, #library-terminal, #passkey-terminal { white-space: pre-wrap; display: none; }
-        #input { background: black; color: green; border: none; font-family: monospace; width: 100%; }
+        #input, #passkey-input { background: black; color: green; border: none; font-family: monospace; width: 100%; }
         #boot-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; color: green; font-family: monospace; display: flex; align-items: center; justify-content: center; flex-direction: column; }
     </style>
 </head>
@@ -14,8 +14,9 @@
     <div id="boot-screen">BOOTING SYSTEM...<br>Please Wait...</div>
     <div id="terminal"></div>
     <div id="library-terminal">Welcome to the MSU Library Archives. Type the name of a book to retrieve its passage:</div>
+    <input type="text" id="input" autofocus placeholder="Enter username..." style="display:none;">
+    <input type="text" id="passkey-input" placeholder="Enter passkey..." style="display:none; margin-top: 10px;">
     <div id="passkey-terminal">Enter the passkey to reveal the coordinates:</div>
-    <input type="text" id="input" autofocus placeholder="Type Here:" style="display:none;">
 
     <script>
         const books = {
@@ -58,6 +59,7 @@
                         setTimeout(() => {
                             document.getElementById("terminal").style.display = "none";
                             document.getElementById("library-terminal").style.display = "block";
+                            document.getElementById("passkey-input").style.display = "block";
                         }, 2000);
                     } else {
                         document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
@@ -65,26 +67,23 @@
                 } else if (stage === 2) {
                     if (books[userInput]) {
                         document.getElementById("library-terminal").innerText += `\nRetrieving passage from '${userInput}':\n${books[userInput]}`;
-                    } else if (userInput.toLowerCase() === "passkey") {
-                        document.getElementById("library-terminal").style.display = "none";
-                        document.getElementById("passkey-terminal").style.display = "block";
                     } else {
                         document.getElementById("library-terminal").innerText += "\nBook not found. Try another title.";
-                    }
-                } else if (stage === 3) {
-                    if (userInput === "Woods") {
-                        document.getElementById("passkey-terminal").innerText += "\nPasskey accepted. Coordinates: 42.71990972470436, -84.47323065544654";
-                    } else {
-                        document.getElementById("passkey-terminal").innerText += "\nIncorrect passkey. Try again.";
                     }
                 }
             }
         });
 
-        document.getElementById("library-terminal").addEventListener("keypress", function(event) {
-            if (event.key === "Enter" && stage === 2) {
-                stage = 3;
-                document.getElementById("passkey-terminal").style.display = "block";
+        document.getElementById("passkey-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                let passkeyInput = this.value.trim();
+                this.value = "";
+
+                if (passkeyInput === "Woods") {
+                    document.getElementById("library-terminal").innerText += "\nPasskey accepted. Coordinates: 42.71990972470436, -84.47323065544654";
+                } else {
+                    document.getElementById("library-terminal").innerText += "\nIncorrect passkey. Try again.";
+                }
             }
         });
     </script>
