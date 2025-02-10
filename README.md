@@ -14,7 +14,7 @@
     <div id="boot-screen">BOOTING SYSTEM...<br>Please Wait...</div>
     <div id="terminal"></div>
     <div id="library-terminal">Welcome to the MSU Library Archives. Type the name of a book to retrieve its passage:</div>
-    <input type="text" id="input" autofocus placeholder="Username..." style="display:none;">
+    <input type="text" id="input" autofocus placeholder="Type Here..." style="display:none;">
     
     <script>
         const books = {
