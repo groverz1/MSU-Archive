@@ -1,46 +1,67 @@
-# MSU-Archive<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MSU Tome Hunt - Terminal</title>
+    <title>MSU Research Terminal</title>
     <style>
         body { background-color: black; color: green; font-family: monospace; padding: 20px; }
         #terminal { white-space: pre-wrap; }
         #input { background: black; color: green; border: none; font-family: monospace; width: 100%; }
+        #boot-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; color: green; font-family: monospace; display: flex; align-items: center; justify-content: center; flex-direction: column; }
     </style>
 </head>
 <body>
-    <div id="terminal"></div>
-    <input type="text" id="input" autofocus placeholder="Enter the passkey...">
+    <div id="boot-screen">BOOTING SYSTEM...<br>Please Wait...</div>
+    <div id="terminal" style="display:none;"></div>
+    <input type="text" id="input" autofocus placeholder="Enter username..." style="display:none;">
     
     <script>
-        const passages = [
-            "1. It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness.",
-            "2. Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse.",
-            "3. All happy families are alike; each unhappy family is unhappy in its own way.",
-            "4. It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.",
-            "5. The sky above the port was the color of television, tuned to a dead channel.",
-            "6. It was a bright cold day in April, and the clocks were striking thirteen.",
-            "7. You are about to begin reading Italo Calvino’s If on a winter’s night a traveler.",
-            "8. It was a pleasure to burn. It was a special pleasure to see things eaten, to see things blackened and changed.",
-            "9. The man in black fled across the desert, and the gunslinger followed.",
-            "10. Mr. and Mrs. Dursley, of number four, Privet Drive, were proud to say that they were perfectly normal, thank you very much."
-        ];
+        const books = {
+            "Tale of Two Cities": "It was the best of times, it was the worst of times, it was the age of wisdom...",
+            "Moby Dick": "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse...",
+            "War and Peace": "Well, Prince, so Genoa and Lucca are now just family estates of the Buonapartes...",
+            "1984": "It was a bright cold day in April, and the clocks were striking thirteen...",
+            "Fahrenheit 451": "It was a pleasure to burn. It was a special pleasure to see things eaten, to see things blackened and changed..."
+        };
         
-        const ottendorfCipher = "3,5,2 | 6,4,1 | 8,3,3"; // Example cipher: (Book, Line, Word)
-        const correctPasskey = "families clocks burn"; // Extracted words in order
+        let stage = 0;
+        let username = "";
+        let password = "";
         
-        document.getElementById("terminal").innerText = "BOOTING...\nWelcome to the MSU Research Archive\n\nDisplaying documents:\n" + passages.join("\n\n") + "\n\nOttendorf Cipher: " + ottendorfCipher;
+        setTimeout(() => {
+            document.getElementById("boot-screen").style.display = "none";
+            document.getElementById("terminal").style.display = "block";
+            document.getElementById("input").style.display = "block";
+            document.getElementById("terminal").innerText = "Enter username:";
+        }, 3000);
         
         document.getElementById("input").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
-                let userInput = this.value.trim().toLowerCase();
+                let userInput = this.value.trim();
                 this.value = "";
-                if (userInput === correctPasskey) {
-                    document.getElementById("terminal").innerText += "\nACCESS GRANTED!\nNext clue location unlocked!";
-                } else {
-                    document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
+                
+                if (stage === 0) {
+                    if (userInput === "Halloway") {
+                        username = userInput;
+                        stage++;
+                        document.getElementById("terminal").innerText += "\nUsername accepted. Enter password:";
+                    } else {
+                        document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
+                    }
+                } else if (stage === 1) {
+                    if (userInput === "EvilArch1987") {
+                        password = userInput;
+                        stage++;
+                        document.getElementById("terminal").innerText += "\nACCESS GRANTED. Type the name of a book to retrieve its passage:";
+                    } else {
+                        document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
+                    }
+                } else if (stage === 2) {
+                    if (books[userInput]) {
+                        document.getElementById("terminal").innerText += `\nRetrieving passage from '${userInput}':\n${books[userInput]}`;
+                    } else {
+                        document.getElementById("terminal").innerText += "\nBook not found. Try another title.";
+                    }
                 }
             }
         });
