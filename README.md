@@ -14,7 +14,7 @@
     <div id="boot-screen">BOOTING SYSTEM...<br>Please Wait...</div>
     <div id="terminal"></div>
     <div id="library-terminal">Welcome to the MSU Library Archives. Type the name of a book to retrieve its passage:</div>
-    <input type="text" id="input" autofocus placeholder="Enter Book Title..." style="display:none;">
+    <input type="text" id="input" autofocus placeholder="Username..." style="display:none;">
     
     <script>
         const books = {
@@ -33,7 +33,7 @@
             document.getElementById("boot-screen").style.display = "none";
             document.getElementById("terminal").style.display = "block";
             document.getElementById("input").style.display = "block";
-            document.getElementById("terminal").innerText = "Enter username:";
+            document.getElementById("terminal").innerText = "Enter Book Title:";
         }, 3000);
         
         document.getElementById("input").addEventListener("keypress", function(event) {
