@@ -5,7 +5,7 @@
     <title>MSU Research Terminal</title>
     <style>
         body { background-color: black; color: green; font-family: monospace; padding: 20px; }
-        #terminal, #library-terminal { white-space: pre-wrap; display: none; }
+        #terminal, #library-terminal, #passkey-terminal { white-space: pre-wrap; display: none; }
         #input { background: black; color: green; border: none; font-family: monospace; width: 100%; }
         #boot-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; color: green; font-family: monospace; display: flex; align-items: center; justify-content: center; flex-direction: column; }
     </style>
@@ -14,8 +14,9 @@
     <div id="boot-screen">BOOTING SYSTEM...<br>Please Wait...</div>
     <div id="terminal"></div>
     <div id="library-terminal">Welcome to the MSU Library Archives. Type the name of a book to retrieve its passage:</div>
-    <input type="text" id="input" autofocus placeholder="Type Here..." style="display:none;">
-    
+    <div id="passkey-terminal">Enter the passkey to reveal the coordinates:</div>
+    <input type="text" id="input" autofocus placeholder="Type Here:" style="display:none;">
+
     <script>
         const books = {
             "Tale of Two Cities": "It was the best of times, it was the worst of times, it was the age of wisdom...",
@@ -24,23 +25,23 @@
             "1984": "It was a bright cold day in April, and the clocks were striking thirteen...",
             "Fahrenheit 451": "It was a pleasure to burn. It was a special pleasure to see things eaten, to see things blackened and changed..."
         };
-        
+
         let stage = 0;
         let username = "";
         let password = "";
-        
+
         setTimeout(() => {
             document.getElementById("boot-screen").style.display = "none";
             document.getElementById("terminal").style.display = "block";
             document.getElementById("input").style.display = "block";
-            document.getElementById("terminal").innerText = "Enter Username:";
+            document.getElementById("terminal").innerText = "Enter username:";
         }, 3000);
-        
+
         document.getElementById("input").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
                 let userInput = this.value.trim();
                 this.value = "";
-                
+
                 if (stage === 0) {
                     if (userInput === "Halloway") {
                         username = userInput;
@@ -64,10 +65,26 @@
                 } else if (stage === 2) {
                     if (books[userInput]) {
                         document.getElementById("library-terminal").innerText += `\nRetrieving passage from '${userInput}':\n${books[userInput]}`;
+                    } else if (userInput.toLowerCase() === "passkey") {
+                        document.getElementById("library-terminal").style.display = "none";
+                        document.getElementById("passkey-terminal").style.display = "block";
                     } else {
                         document.getElementById("library-terminal").innerText += "\nBook not found. Try another title.";
                     }
+                } else if (stage === 3) {
+                    if (userInput === "Woods") {
+                        document.getElementById("passkey-terminal").innerText += "\nPasskey accepted. Coordinates: 42.71990972470436, -84.47323065544654";
+                    } else {
+                        document.getElementById("passkey-terminal").innerText += "\nIncorrect passkey. Try again.";
+                    }
                 }
+            }
+        });
+
+        document.getElementById("library-terminal").addEventListener("keypress", function(event) {
+            if (event.key === "Enter" && stage === 2) {
+                stage = 3;
+                document.getElementById("passkey-terminal").style.display = "block";
             }
         });
     </script>
