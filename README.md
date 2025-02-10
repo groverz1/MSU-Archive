@@ -14,7 +14,7 @@
     <div id="boot-screen">BOOTING SYSTEM...<br>Please Wait...</div>
     <div id="terminal"></div>
     <div id="library-terminal">Welcome to the MSU Library Archives. Type the name of a book to retrieve its passage or enter the restricted access code:</div>
-    <input type="text" id="input" autofocus placeholder="Enter username..." style="display:none;">
+    <input type="text" id="input" autofocus placeholder="Type Here..." style="display:none;">
     <input type="text" id="passkey-input" placeholder="Enter restricted access code..." style="display:none;">
 
     <script>
