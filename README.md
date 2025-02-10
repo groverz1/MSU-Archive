@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -5,14 +6,15 @@
     <title>MSU Research Terminal</title>
     <style>
         body { background-color: black; color: green; font-family: monospace; padding: 20px; }
-        #terminal { white-space: pre-wrap; }
+        #terminal, #library-terminal { white-space: pre-wrap; display: none; }
         #input { background: black; color: green; border: none; font-family: monospace; width: 100%; }
         #boot-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; color: green; font-family: monospace; display: flex; align-items: center; justify-content: center; flex-direction: column; }
     </style>
 </head>
 <body>
     <div id="boot-screen">BOOTING SYSTEM...<br>Please Wait...</div>
-    <div id="terminal" style="display:none;"></div>
+    <div id="terminal"></div>
+    <div id="library-terminal">Welcome to the MSU Library Archives. Type the name of a book to retrieve its passage:</div>
     <input type="text" id="input" autofocus placeholder="Enter username..." style="display:none;">
     
     <script>
@@ -52,15 +54,19 @@
                     if (userInput === "EvilArch1987") {
                         password = userInput;
                         stage++;
-                        document.getElementById("terminal").innerText += "\nACCESS GRANTED. Type the name of a book to retrieve its passage:";
+                        document.getElementById("terminal").innerText += "\nACCESS GRANTED.\n";
+                        setTimeout(() => {
+                            document.getElementById("terminal").style.display = "none";
+                            document.getElementById("library-terminal").style.display = "block";
+                        }, 2000);
                     } else {
                         document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
                     }
                 } else if (stage === 2) {
                     if (books[userInput]) {
-                        document.getElementById("terminal").innerText += `\nRetrieving passage from '${userInput}':\n${books[userInput]}`;
+                        document.getElementById("library-terminal").innerText += `\nRetrieving passage from '${userInput}':\n${books[userInput]}`;
                     } else {
-                        document.getElementById("terminal").innerText += "\nBook not found. Try another title.";
+                        document.getElementById("library-terminal").innerText += "\nBook not found. Try another title.";
                     }
                 }
             }
