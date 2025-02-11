@@ -118,7 +118,7 @@
                     document.getElementById("terminal").innerText += `\n- ${book}`;
                 }
               } else if (userInput === "Evil Architect") {
-                    showFullscreenImage();
+                    showFullscreenImage("orginal.webp");
             } else {
                 playSound("error-sound");
                 document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
