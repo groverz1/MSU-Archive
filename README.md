@@ -117,8 +117,8 @@
                 for (let book in books) {
                     document.getElementById("terminal").innerText += `\n- ${book}`;
                 }
-              } else if (userInput === "Evil Architect") {
-                    showFullscreenImage("orginal.webp");
+            } else if (userInput === "Evil Architect") {
+                showFullscreenImage();
             } else {
                 playSound("error-sound");
                 document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
