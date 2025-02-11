@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -45,10 +46,11 @@
     <input type="text" id="input" autofocus placeholder="Enter username..." style="display:none;">
     <input type="text" id="passkey-input" placeholder="Enter restricted access code..." style="display:none;">
 
-    <audio id="keypress-sound" src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YRAAAAAA"></audio>
-    <audio id="boot-sound" src="data:audio/wav;base64,UklGRlIAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YVQAAAAA"></audio>
-    <audio id="success-sound" src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YW8AAAAA"></audio>
-    <audio id="error-sound" src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YW8AAAAA"></audio>
+    <!-- Replace the audio source with actual audio files -->
+    <audio id="keypress-sound" src="keypress.wav"></audio>
+    <audio id="boot-sound" src="boot.wav"></audio>
+    <audio id="success-sound" src="success.wav"></audio>
+    <audio id="error-sound" src="error.wav"></audio>
 
     <script>
         const books = {
@@ -78,7 +80,13 @@
         let password = "";
 
         function playSound(id) {
-            document.getElementById(id).play();
+            const sound = document.getElementById(id);
+            if (sound) {
+                sound.currentTime = 0;
+                sound.play().catch(() => {
+                    console.error(`Unable to play sound: ${id}`);
+                });
+            }
         }
 
         setTimeout(() => {
@@ -140,4 +148,13 @@
 
                 if (passkeyInput === "Woods") {
                     playSound("success-sound");
-                    document.getElementById("library-terminal").innerText += "\nPasskey accepted. Coordinates: 42.71990972470436, -84.47323065544654"
+                    document.getElementById("library-terminal").innerText += "\nPasskey accepted. Coordinates: 42.71990972470436, -84.47323065544654";
+                } else {
+                    playSound("error-sound");
+                    document.getElementById("library-terminal").innerText += "\nInvalid passkey. Try again.";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
