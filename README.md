@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +18,8 @@
         #input, #passkey-input { 
             background: black; 
             color: #00FF00; 
-            border: none; 
+            border: green;
+            color: #008106;
             font-family: "Courier New", Courier, monospace; 
             width: 100%; 
             margin-top: 10px; 
