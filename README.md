@@ -127,25 +127,23 @@
                         playSound("error-sound");
                         document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
                     }
-                 } else if (stage === 2) {
-                    if (userInput.toLowerCase() === "help") {
-                        playSound("success-sound");
-                        document.getElementById("library-terminal").innerText += "\nAvailable books in the catalogue:";
-                        for (let book in books) {
-                           document.getElementById("library-terminal").innerText += `\n- ${book}`;
+        } else if (stage === 2) {
+            if (userInput.toLowerCase() === "help") {
+                playSound("success-sound");
+                document.getElementById("library-terminal").innerText += "\nAvailable books in the catalogue:";
+                for (let book in books) {
+                    document.getElementById("library-terminal").innerText += `\n- ${book}`;
                 }
-            
-                } else if (stage === 2) {
-                    if (books[userInput]) {
-                        playSound("success-sound");
-                        document.getElementById("library-terminal").innerText += `\nRetrieving passage from '${userInput}':\n${books[userInput]}`;
-                    } else {
-                        playSound("error-sound");
-                        document.getElementById("library-terminal").innerText += "\nBook not found. Try another title.";
-                    }
-                }
+            } else if (books[userInput]) {
+                playSound("success-sound");
+                document.getElementById("library-terminal").innerText += `\nRetrieving passage from '${userInput}':\n${books[userInput]}`;
+            } else {
+                playSound("error-sound");
+                document.getElementById("library-terminal").innerText += "\nBook not found. Try another title.";
             }
-        });
+        }
+    }
+});
 
         document.getElementById("passkey-input").addEventListener("keypress", function(event) {
             playSound("keypress-sound");
