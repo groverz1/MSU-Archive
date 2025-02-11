@@ -91,42 +91,42 @@
             document.getElementById("terminal").innerText = "Enter username:";
         }, 3000);
 
-        document.getElementById("input").addEventListener("keypress", function(event) {
-            playSound("keypress-sound");
-            if (event.key === "Enter") {
-                let userInput = this.value.trim();
-                this.value = "";
+       document.getElementById("input").addEventListener("keypress", function(event) {
+    playSound("keypress-sound");
+    if (event.key === "Enter") {
+        let userInput = this.value.trim();
+        this.value = "";
 
-                if (stage === 0) {
-                    if (userInput === "Halloway") {
-                        username = userInput;
-                        stage++;
-                        playSound("success-sound");
-                        document.getElementById("terminal").innerText += "\nUsername accepted. Enter password:";
-                    } else if (userInput.toLowerCase() === "help") {
-                        playSound("success-sound");
-                        document.getElementById("terminal").innerText += "\nAvailable books in the catalogue:";
-                        for (let book in books) {
-                            document.getElementById("terminal").innerText += `\n- ${book}`;
-                        }
-                    } else {
-                        playSound("error-sound");
-                        document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
-                    }
-                } else if (stage === 1) {
-                    if (userInput === "EvilArch1987") {
-                        password = userInput;
-                        stage++;
-                        playSound("success-sound");
-                        document.getElementById("terminal").innerText += "\nACCESS GRANTED.\n";
-                        setTimeout(() => {
-                            document.getElementById("terminal").style.display = "none";
-                            document.getElementById("library-terminal").style.display = "block";
-                        }, 2000);
-                    } else {
-                        playSound("error-sound");
-                        document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
-                    }
+        if (stage === 0) {
+            if (userInput === "Halloway") {
+                username = userInput;
+                stage++;
+                playSound("success-sound");
+                document.getElementById("terminal").innerText += "\nUsername accepted. Enter password:";
+            } else if (userInput.toLowerCase() === "help") {
+                playSound("success-sound");
+                document.getElementById("terminal").innerText += "\nAvailable books in the catalogue:";
+                for (let book in books) {
+                    document.getElementById("terminal").innerText += `\n- ${book}`;
+                }
+            } else {
+                playSound("error-sound");
+                document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
+            }
+        } else if (stage === 1) {
+            if (userInput === "EvilArch1987") {
+                password = userInput;
+                stage++;
+                playSound("success-sound");
+                document.getElementById("terminal").innerText += "\nACCESS GRANTED.\n";
+                setTimeout(() => {
+                    document.getElementById("terminal").style.display = "none";
+                    document.getElementById("library-terminal").style.display = "block";
+                }, 2000);
+            } else {
+                playSound("error-sound");
+                document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
+            }
         } else if (stage === 2) {
             if (userInput.toLowerCase() === "help") {
                 playSound("success-sound");
@@ -144,7 +144,6 @@
         }
     }
 });
-
         document.getElementById("passkey-input").addEventListener("keypress", function(event) {
             playSound("keypress-sound");
             if (event.key === "Enter") {
