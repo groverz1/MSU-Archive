@@ -90,7 +90,7 @@
             document.getElementById("input").style.display = "block";
             document.getElementById("passkey-input").style.display = "block";
             document.getElementById("terminal").innerText = "Enter username:";
-        }, 3000);
+        }, 50);
 
         document.getElementById("input").addEventListener("keypress", function(event) {
             playSound("keypress-sound");
