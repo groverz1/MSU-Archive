@@ -45,10 +45,10 @@
     <input type="text" id="input" autofocus placeholder="Enter username..." style="display:none;">
     <input type="text" id="passkey-input" placeholder="Enter restricted access code..." style="display:none;">
 
-    <audio id="keypress-sound" src="keypress.wav"></audio>
+    <audio id="keypress-sound" src="mixkit-interface-device-click-2577.wav"></audio>
     <audio id="boot-sound" src="mixkit-arcade-rising-231 (1).wav"></audio>
-    <audio id="success-sound" src="success.wav"></audio>
-    <audio id="error-sound" src="error.wav"></audio>
+    <audio id="success-sound" src="mixkit-interface-option-select-2573.wav"></audio>
+    <audio id="error-sound" src="mixkit-electric-buzz-glitch-2594.wav"></audio>
 
     <script>
         const books = {
