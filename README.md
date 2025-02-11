@@ -156,10 +156,3 @@
             }
         });
     </script>
-</body>
-</html>
-                this.value = "";
-
-                if (passkeyInput === "Woods") {
-                    playSound("success-sound");
-                    document.getElementById("library-terminal").innerText += "\nPasskey accepted. Coordinates: 42.71990972470436, -84.47323065544654"
