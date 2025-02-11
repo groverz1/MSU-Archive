@@ -81,15 +81,7 @@
         function playSound(id) {
             document.getElementById(id).play();
         }
-   function showFullscreenImage() {
-            const fullscreenImage = document.getElementById("original.webp");
-            fullscreenImage.style.display = "flex";
-            setTimeout(() => {
-                fullscreenImage.style.display = "none";
-                document.getElementById("terminal").innerText = "Enter username:";
-                stage = 0;
-            }, 10000);
-        }
+         }
         setTimeout(() => {
             playSound("boot-sound");
             document.getElementById("boot-screen").style.display = "none";
@@ -117,8 +109,7 @@
                 for (let book in books) {
                     document.getElementById("terminal").innerText += `\n- ${book}`;
                 }
-            } else if (userInput === "Evil Architect") {
-                showFullscreenImage();
+       
             } else {
                 playSound("error-sound");
                 document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
