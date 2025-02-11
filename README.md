@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,6 +10,7 @@
             color: #00FF00; 
             font-family: "Courier New", Courier, monospace; 
             padding: 20px; 
+            border: 5px solid #00FF00; /* Added green border */
         }
         #terminal, #library-terminal { 
             white-space: pre-wrap; 
@@ -78,13 +80,7 @@
         let password = "";
 
         function playSound(id) {
-            const sound = document.getElementById(id);
-            if (sound) {
-                sound.currentTime = 0;
-                sound.play().catch(() => {
-                    console.error(`Unable to play sound: ${id}`);
-                });
-            }
+            document.getElementById(id).play();
         }
 
         setTimeout(() => {
@@ -146,13 +142,4 @@
 
                 if (passkeyInput === "Woods") {
                     playSound("success-sound");
-                    document.getElementById("library-terminal").innerText += "\nPasskey accepted. Coordinates: 42.71990972470436, -84.47323065544654";
-                } else {
-                    playSound("error-sound");
-                    document.getElementById("library-terminal").innerText += "\nInvalid passkey. Try again.";
-                }
-            }
-        });
-    </script>
-</body>
-</html>
+                    document.getElementById("library-terminal").innerText += "\nPasskey accepted. Coordinates: 42.71990972470436, -84.47323065544654"
