@@ -90,7 +90,7 @@
         }
 
         setTimeout(() => {
-            playSound("boot-screen");
+            playSound("boot-sound");
             document.getElementById("boot-screen").style.display = "none";
             document.getElementById("terminal").style.display = "block";
             document.getElementById("input").style.display = "block";
