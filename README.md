@@ -81,7 +81,6 @@
         function playSound(id) {
             document.getElementById(id).play();
         }
-         }
         setTimeout(() => {
             playSound("boot-sound");
             document.getElementById("boot-screen").style.display = "none";
@@ -109,7 +108,6 @@
                 for (let book in books) {
                     document.getElementById("terminal").innerText += `\n- ${book}`;
                 }
-       
             } else {
                 playSound("error-sound");
                 document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
