@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -46,9 +45,8 @@
     <input type="text" id="input" autofocus placeholder="Enter username..." style="display:none;">
     <input type="text" id="passkey-input" placeholder="Enter restricted access code..." style="display:none;">
 
-    <!-- Replace the audio source with actual audio files -->
     <audio id="keypress-sound" src="keypress.wav"></audio>
-    <audio id="boot-sound" src="boot.wav"></audio>
+    <audio id="boot-sound" src="mixkit-arcade-rising-231 (1).wav"></audio>
     <audio id="success-sound" src="success.wav"></audio>
     <audio id="error-sound" src="error.wav"></audio>
 
