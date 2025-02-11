@@ -9,7 +9,7 @@
             color: #00FF00; 
             font-family: "Courier New", Courier, monospace; 
             padding: 20px; 
-            border: 5px solid #00FF00;
+            border: 5px solid #00FF00; 
         }
         #terminal, #library-terminal { 
             white-space: pre-wrap; 
@@ -18,8 +18,7 @@
         #input, #passkey-input { 
             background: black; 
             color: #00FF00; 
-            border: green;
-            color: #008106;
+            border: none; 
             font-family: "Courier New", Courier, monospace; 
             width: 100%; 
             margin-top: 10px; 
@@ -79,14 +78,8 @@
         let username = "";
         let password = "";
 
-          function playSound(id) {
-            const sound = document.getElementById(id);
-            if (sound) {
-                sound.currentTime = 0;
-                sound.play().catch(() => {
-                    console.error(`Unable to play sound: ${id}`);
-                });
-            }
+        function playSound(id) {
+            document.getElementById(id).play();
         }
 
         setTimeout(() => {
@@ -110,6 +103,12 @@
                         stage++;
                         playSound("success-sound");
                         document.getElementById("terminal").innerText += "\nUsername accepted. Enter password:";
+                    } else if (userInput.toLowerCase() === "help") {
+                        playSound("success-sound");
+                        document.getElementById("terminal").innerText += "\nAvailable books in the catalogue:";
+                        for (let book in books) {
+                            document.getElementById("terminal").innerText += `\n- ${book}`;
+                        }
                     } else {
                         playSound("error-sound");
                         document.getElementById("terminal").innerText += "\nACCESS DENIED. Try again.";
@@ -156,3 +155,4 @@
             }
         });
     </script>
+</body>
