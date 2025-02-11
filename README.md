@@ -9,7 +9,7 @@
             color: #00FF00; 
             font-family: "Courier New", Courier, monospace; 
             padding: 20px; 
-            border: 5px solid #00FF00; /* Added green border */
+            border: 5px solid #00FF00;
         }
         #terminal, #library-terminal { 
             white-space: pre-wrap; 
@@ -79,8 +79,14 @@
         let username = "";
         let password = "";
 
-        function playSound(id) {
-            document.getElementById(id).play();
+          function playSound(id) {
+            const sound = document.getElementById(id);
+            if (sound) {
+                sound.currentTime = 0;
+                sound.play().catch(() => {
+                    console.error(`Unable to play sound: ${id}`);
+                });
+            }
         }
 
         setTimeout(() => {
@@ -90,7 +96,7 @@
             document.getElementById("input").style.display = "block";
             document.getElementById("passkey-input").style.display = "block";
             document.getElementById("terminal").innerText = "Enter username:";
-        }, 50);
+        }, 3000);
 
         document.getElementById("input").addEventListener("keypress", function(event) {
             playSound("keypress-sound");
@@ -138,6 +144,20 @@
             playSound("keypress-sound");
             if (event.key === "Enter") {
                 let passkeyInput = this.value.trim();
+                this.value = "";
+
+                if (passkeyInput === "Woods") {
+                    playSound("success-sound");
+                    document.getElementById("library-terminal").innerText += "\nPasskey accepted. Coordinates: 42.71990972470436, -84.47323065544654";
+                } else {
+                    playSound("error-sound");
+                    document.getElementById("library-terminal").innerText += "\nInvalid passkey. Try again.";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
                 this.value = "";
 
                 if (passkeyInput === "Woods") {
